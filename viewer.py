@@ -116,5 +116,5 @@ if __name__=='__main__':
     download_feed('http://thehorrorsofitall.blogspot.com/feeds/posts/default')
     download_feed('http://pappysgoldenage.blogspot.com/feeds/posts/default')
 
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=False)
 
