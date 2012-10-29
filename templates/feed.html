@@ -10,8 +10,8 @@
 {% set last_page = (entries|count / per_page|float)|round(method='ceil')|int %}
 
 <body>
+    <a href='{{ ROOT }}/'>&lt; Back to Feeds</a>
     <h1>
-        <a href='{{ ROOT }}/'>&lt;</a>
         {% with img = feed.gd_image %}
             {% if img %}
         <img width={{ img.width }} height={{ img.height }}
