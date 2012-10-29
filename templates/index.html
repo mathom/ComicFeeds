@@ -3,7 +3,7 @@
 <head>
     <meta charset=utf-8>
     <title>Feeds</title>
-    <link rel='stylesheet' type='text/css' href='/static/base.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ ROOT }}/static/base.css'/>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     {% for data in feeds %}
         <li class='feed'>
             <h2>
-                <a href='/feed/{{ data.hashid }}'>
+                <a href='{{ ROOT }}/feed/{{ data.hashid }}'>
                 {% with img = data.feed.gd_image %}
                     {% if img %}
                 <img width={{ img.width }} height={{ img.height }}
@@ -26,7 +26,7 @@
             <ul>
             {% for post in data.entries[:3] %}
                 <li class='post'>
-                    <a href='/feed/{{ data.hashid }}/{{ post.id }}'>
+                    <a href='{{ ROOT }}/feed/{{ data.hashid }}/{{ post.id }}'>
                     {% with img = post.media_thumbnail %}
                         {% if img %}
                     <img width={{ img[0].width }} height={{ img[0].height }}

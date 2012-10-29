@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+import os
 import time
 import feedparser
 import hashlib
 from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 
+ROOT = os.environ.get('ROOT', '')
 CHECK_FOR_UPDATES = 60*30 # check for updates every 30 minutes
 
 app = Flask(__name__)
@@ -44,6 +46,7 @@ def index():
     sorted_feeds = sorted(feeds.values(), key=lambda x: x['feed']['title'])
 
     args = {
+        'ROOT': ROOT,
         'feeds': sorted_feeds
     }
     
@@ -61,6 +64,7 @@ def show_feed(hashid):
     update_feed(data)
 
     args = {
+        'ROOT': ROOT,
         'page': page
     }
     args.update(data)
@@ -98,6 +102,7 @@ def show_post(hashid, postid):
             images.append(a.attrs['href'])
 
     args = {
+        'ROOT': ROOT,
         'hashid': hashid,
         'page': page,
         'feed': data['feed'],
@@ -110,8 +115,6 @@ def show_post(hashid, postid):
 
 
 if __name__=='__main__':
-    # sample = 'http://thehorrorsofitall.blogspot.com/feeds/posts/default'
-
     download_feed('http://bloodypulptales.com/feeds/posts/default')
     download_feed('http://thehorrorsofitall.blogspot.com/feeds/posts/default')
     download_feed('http://pappysgoldenage.blogspot.com/feeds/posts/default')

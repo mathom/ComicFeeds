@@ -3,7 +3,7 @@
 <head>
     <meta charset=utf-8>
     <title>{{ feed.title }}</title>
-    <link rel='stylesheet' type='text/css' href='/static/base.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ ROOT }}/static/base.css'/>
 </head>
 
 {% set per_page = 10 %}
@@ -11,7 +11,7 @@
 
 <body>
     <h1>
-        <a href='/'>&lt;</a>
+        <a href='{{ ROOT }}/'>&lt;</a>
         {% with img = feed.gd_image %}
             {% if img %}
         <img width={{ img.width }} height={{ img.height }}
@@ -34,7 +34,7 @@
     <ul>
     {% for post in entries[(page-1)*per_page:page*per_page] %}
         <li class='post'>
-            <a href='/feed/{{ hashid }}/{{ post.id }}'>
+            <a href='{{ ROOT }}/feed/{{ hashid }}/{{ post.id }}'>
             {% with img = post.media_thumbnail %}
                 {% if img %}
             <img width={{ img[0].width }} height={{ img[0].height }}
@@ -50,17 +50,17 @@
 
     <div class='pager'>
         {% if page > 1 %}
-        <a href='/feed/{{ hashid}}?p=1'>'Latest</a>
+        <a href='?p=1'>'Latest</a>
         {% endif %}
 
         {% if page < last_page %}
-        <a href='/feed/{{ hashid }}?p={{ page + 1 }}'>Older</a>
+        <a href='?p={{ page + 1 }}'>Older</a>
         {% endif %}
 
         Page {{ page }} of {{ last_page }}
 
         {% if page > 1 %}
-        <a href='/feed/{{ hashid }}?p={{ page - 1 }}'>Newer</a>
+        <a href='?p={{ page - 1 }}'>Newer</a>
         {% endif %}
     </div>
 

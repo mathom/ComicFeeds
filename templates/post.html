@@ -3,12 +3,12 @@
 <head>
     <meta charset=utf-8>
     <title>{{ title }} {{ page }} of {{ images|count }}</title>
-    <link rel='stylesheet' type='text/css' href='/static/base.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ ROOT }}/static/base.css'/>
 </head>
 
 <body>
     <h1>
-        <a href='/feed/{{ hashid }}'>
+        <a href='{{ ROOT }}/feed/{{ hashid }}'>
         &lt;
         {% with img = feed.gd_image %}
             {% if img %}
