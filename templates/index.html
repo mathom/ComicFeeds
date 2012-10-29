@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <title>Feeds</title>
+    <link rel='stylesheet' type='text/css' href='/static/base.css'/>
+</head>
+
+<body>
+    <h1>Feeds</h1>
+
+    <ul>
+    {% for data in feeds %}
+        <li class='feed'>
+            <h2>
+                <a href='/feed/{{ data.hashid }}'>
+                {% with img = data.feed.gd_image %}
+                    {% if img %}
+                <img width={{ img.width }} height={{ img.height }}
+                     src='{{ img.src }}'/>
+                    {% endif %}
+                {% endwith %}
+                {{ data.feed.title }}
+                </a>
+            </h2>
+            <ul>
+            {% for post in data.entries[:3] %}
+                <li class='post'>
+                    <a href='/feed/{{ data.hashid }}/{{ post.id }}'>
+                    {% with img = post.media_thumbnail %}
+                        {% if img %}
+                    <img width={{ img[0].width }} height={{ img[0].height }}
+                         class='post_thumb' src='{{ img[0].url }}'/>
+                        {% endif %}
+                    {% endwith %}
+                    {{ post.title }}
+                    </a>
+                    <div>{{ post.updated }}</div>
+                </li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>

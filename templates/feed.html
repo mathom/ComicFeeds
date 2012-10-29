@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <title>{{ feed.title }}</title>
+    <link rel='stylesheet' type='text/css' href='/static/base.css'/>
+</head>
+
+{% set per_page = 10 %}
+{% set last_page = (entries|count / per_page|float)|round(method='ceil')|int %}
+
+<body>
+    <h1>
+        <a href='/'>&lt;</a>
+        {% with img = feed.gd_image %}
+            {% if img %}
+        <img width={{ img.width }} height={{ img.height }}
+             src='{{ img.src }}'/>
+            {% endif %}
+        {% endwith %}
+        {{ feed.title }}
+    </h1>
+
+    <div>
+    </div>
+
+    <div>
+        Found {{ entries|count }} posts at
+        <a href='{{ feed.link }}'>source blog</a>
+        by <a href='{{ feed.author_detail.href }}'>
+        {{ feed.author_detail.name }}</a>.
+    </div>
+
+    <ul>
+    {% for post in entries[(page-1)*per_page:page*per_page] %}
+        <li class='post'>
+            <a href='/feed/{{ hashid }}/{{ post.id }}'>
+            {% with img = post.media_thumbnail %}
+                {% if img %}
+            <img width={{ img[0].width }} height={{ img[0].height }}
+                 class='post_thumb' src='{{ img[0].url }}'/>
+                {% endif %}
+            {% endwith %}
+            {{ post.title }}
+            </a>
+            <div>{{ post.updated }}</div>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <div class='pager'>
+        {% if page > 1 %}
+        <a href='/feed/{{ hashid}}?p=1'>'Latest</a>
+        {% endif %}
+
+        {% if page < last_page %}
+        <a href='/feed/{{ hashid }}?p={{ page + 1 }}'>Older</a>
+        {% endif %}
+
+        Page {{ page }} of {{ last_page }}
+
+        {% if page > 1 %}
+        <a href='/feed/{{ hashid }}?p={{ page - 1 }}'>Newer</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

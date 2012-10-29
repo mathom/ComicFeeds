@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: sans
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img.post_thumb {
+    vertical-align: text-top;
+    float: left;
+    margin-bottom: 1em;
+    margin-right: 1em;
+}
+
+.post {
+    clear: both;
+}
+
+.feed {
+    clear: both;
+}
+
+.pager {
+    clear: both;
+    width: 100%;
+}

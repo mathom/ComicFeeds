@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <title>{{ title }} {{ page }} of {{ images|count }}</title>
+    <link rel='stylesheet' type='text/css' href='/static/base.css'/>
+</head>
+
+<body>
+    <h1>
+        <a href='/feed/{{ hashid }}'>
+        &lt;
+        {% with img = feed.gd_image %}
+            {% if img %}
+        <img width={{ img.width }} height={{ img.height }}
+             src='{{ img.src }}'/>
+            {% endif %}
+        {% endwith %}
+        {{ feed.title }}
+        </a>
+    </h1>
+
+    <h2>
+        {% with img = media_thumbnail %}
+            {% if img %}
+        <img width={{ img[0].width }} height={{ img[0].height }}
+             class='post_thumb' src='{{ img[0].url }}'/>
+            {% endif %}
+        {% endwith %}
+        {{ title }}
+    </h2>
+
+    {% if page == 1 %}
+        {{ text|safe }}
+    {% endif %}
+
+    {% if page != images|count %}
+    <a href='?p={{ page + 1}}'>
+    {% endif %}
+        <img src='{{ images[page-1] }}'/>
+    {% if page != images|count %}
+    </a>
+    {% endif %}
+    <div>
+        Page {{ page }} of {{ images|count }}.
+        {% if page != 1 %}
+        <a href='?p={{ page - 1 }}'>Previous</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
